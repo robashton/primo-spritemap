@@ -55,6 +55,7 @@ SpriteMap.prototype = {
         function() { 
           this.generateCollisionMaps(width, height) }, this)
 
+    // TODO: This doesn't really belong here, it needs storing elsewhere or returning
     this.collisionmapsize = width
     var canvas = new MemoryCanvas(width, height)
 
