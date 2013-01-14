@@ -1,0 +1,26 @@
+{
+  "name": "primo-spritemap",
+  "version": "0.0.0",
+  "description": "Spritemap module for HTML5 canvas and PrimoJS",
+  "main": "spritemap.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/robashton/primo-spritemap.git"
+  },
+  "keywords": [
+    "HTML5",
+    "canvas",
+    "spritemap",
+    "image",
+    "primo"
+  ],
+  "author": "Rob Ashton",
+  "license": "MIT",
+  "dependencies": {
+    "primo-events": "~1.0.2",
+    "primo-canvas": "0.0.0"
+  }
+}
