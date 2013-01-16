@@ -17,7 +17,7 @@ var SpriteMap = function(texture, spritewidth, spriteheight) {
 }
 
 SpriteMap.prototype = {
-  drawTo: function(context, index,  x, y, width, height, flipx, flipy) {
+  drawTo: function(context, index,  x, y, width, height, flipx, flipy, rotation) {
     if(!this.loaded) return
 
     var img = this.texture.get()
@@ -30,9 +30,23 @@ SpriteMap.prototype = {
 
     var scalex = flipx ? -1 : 1
     var scaley = flipy ? -1 : 1
+    var contextSaved = false
+
+    if(rotation) {
+      if(!contextSaved) {
+        contextSaved = true
+        context.save()
+      }
+      context.translate(x + width/2.0, y + height/2.0)
+      context.rotate(rotation)
+      context.translate(-(x + width/2.0),-(y + height/2.0))
+    }
 
     if(flipx || flipy) {
-      context.save()
+      if(!contextSaved) {
+        contextSaved = true
+        context.save()
+      }
       context.scale(scalex, scaley)
       x *= scalex
       y *= scaley
@@ -40,13 +54,15 @@ SpriteMap.prototype = {
         x -= width
       if(flipy)
         y -= height
-    }
+      contextSaved = true
+    } 
+
 
     context.drawImage(img, 
       sx, sy, this.spritewidth, this.spriteheight,
       x, y , width || this.spritewidth, height || this.spriteheight)
 
-    if(flipx || flipy) 
+    if(contextSaved) 
       context.restore()
   },
   generateCollisionMaps: function(width, height) {
