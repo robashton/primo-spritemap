@@ -25,8 +25,8 @@ SpriteMap.prototype = {
     var rownumber = Math.floor(index / this.tilecountwidth)
     var columnnumber = index % this.tilecountwidth
 
-    var sx = columnnumber * this.spritewidth
-    var sy = rownumber * this.spriteheight
+    var sx = columnnumber * this.tilewidth
+    var sy = rownumber * this.tileheight
 
     var scalex = flipx ? -1 : 1
     var scaley = flipy ? -1 : 1
