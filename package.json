@@ -22,5 +22,6 @@
   "dependencies": {
     "primo-events": "~1.0.2",
     "primo-canvas": "0.0.0"
+    "underscore": ""
   }
 }

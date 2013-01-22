@@ -2,13 +2,13 @@ var _ = require('underscore')
 var MemoryCanvas = require('primo-canvas')
 var Eventable = require('primo-events')
 
-var SpriteMap = function(texture, spritewidth, spriteheight) {
+var SpriteMap = function(texture, tilecountwidth, tilecountheight) {
   Eventable.call(this)
-  this.spritewidth = spritewidth
-  this.spriteheight = spriteheight
-  this.tilecount = 0
-  this.tilecountwidth = 0
-  this.tilecountheight = 0
+  this.tilewidth = 0
+  this.tileheight = 0
+  this.tilecountwidth = tilecountwidth || 1
+  this.tilecountheight = tilecountheight || 1
+  this.tilecount = tilecountwidth * tilecountheight 
   this.collisionmapsize = 0
   this.collisionMaps = []
   this.texture = texture
@@ -59,8 +59,8 @@ SpriteMap.prototype = {
 
 
     context.drawImage(img, 
-      sx, sy, this.spritewidth, this.spriteheight,
-      x, y , width || this.spritewidth, height || this.spriteheight)
+      sx, sy, this.tilewidth, this.tileheight,
+      x, y , width || this.tilewidth, height || this.tileheight)
 
     if(contextSaved) 
       context.restore()
@@ -97,9 +97,8 @@ SpriteMap.prototype = {
   onLoaded: function() {
     this.loaded = true
     var img = this.texture.get()
-    this.tilecountwidth = img.width / this.spritewidth
-    this.tilecountheight = img.height / this.spriteheight
-    this.tilecount = this.tilecountwidth * this.tilecountheight
+    this.tilewidth = img.width / this.tilecountwidth
+    this.tileheight = img.height / this.tilecountheight
     this.raise('loaded')
   }
 }
